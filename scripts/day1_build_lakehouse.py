@@ -224,7 +224,7 @@ def build_gold() -> None:
     fact_snapshot = pd.DataFrame(snapshots)
     fact_snapshot = (
         fact_snapshot.merge(dim_department, on="Department")
-        .merge(dim_jobrole[["JobRoleID", "JobRole"]], on="JobRole")
+        .merge(dim_jobrole[["JobRoleID", "JobRole", "JobLevel"]], on=["JobRole", "JobLevel"])
         .drop(columns=["Department", "JobRole"])
     )
     fact_snapshot.to_parquet(GOLD_DIR / "fact_employee_snapshot.parquet", index=False)
@@ -316,3 +316,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
