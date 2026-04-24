@@ -1,0 +1,39 @@
+# Data & ETL
+pandas==2.2.*
+pyarrow==15.*
+duckdb==1.*
+numpy==1.26.*
+
+# ML
+scikit-learn==1.4.*
+shap==0.44.*
+matplotlib==3.8.*
+seaborn==0.13.*
+imbalanced-learn==0.12.*
+
+# Synthetic data
+faker==24.*
+
+# Policy docs / PDF
+reportlab==4.*
+
+# Backend
+fastapi==0.110.*
+uvicorn[standard]==0.29.*
+pydantic==2.*
+python-dotenv==1.*
+
+# RAG
+chromadb==0.4.*
+google-generativeai==0.5.*
+pypdf==4.*
+
+# Frontend
+streamlit==1.33.*
+plotly==5.*
+requests==2.*
+
+# Dev
+jupyterlab==4.*
+ipykernel==6.*
+nbformat==5.*
