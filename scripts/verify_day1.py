@@ -32,6 +32,20 @@ snapshot_rows = duckdb.sql(
     "SELECT COUNT(*) FROM 'lakehouse/gold/fact_employee_snapshot.parquet'"
 ).fetchone()[0]
 
+
+max_snapshot_rows = silver_rows * 24
+if snapshot_rows > max_snapshot_rows:
+    raise SystemExit(
+        f"Invalid snapshot row count: {snapshot_rows:,}. "
+        f"Maximum possible is {max_snapshot_rows:,} "
+        f"because silver rows are {silver_rows:,} and horizon is 24 months."
+    )
+
+if snapshot_rows < 30000:
+    raise SystemExit(
+        f"Snapshot row count looks too low: {snapshot_rows:,}. "
+        "Expected roughly 30,000-35,280 rows."
+    )
 print("DAY 1 VERIFY PASSED")
 print(f"bronze rows: {bronze_rows:,}")
 print(f"silver rows: {silver_rows:,}")
@@ -39,3 +53,4 @@ print(f"snapshot rows: {snapshot_rows:,}")
 print("gold files:")
 for p in sorted(Path("lakehouse/gold").glob("*.parquet")):
     print(" -", p.name)
+
