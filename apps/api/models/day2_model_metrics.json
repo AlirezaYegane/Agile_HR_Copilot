@@ -1,0 +1,57 @@
+{
+  "rows": 1470,
+  "target_rate": 0.16122448979591836,
+  "threshold": 0.2887271823819748,
+  "models": {
+    "Logistic Regression": {
+      "roc_auc": 0.8286435192803466,
+      "pr_auc": 0.5761701021608514
+    },
+    "Random Forest": {
+      "roc_auc": 0.7859689539794855,
+      "pr_auc": 0.44956128922161603
+    }
+  },
+  "random_forest_classification_report": {
+    "0": {
+      "precision": 0.931899641577061,
+      "recall": 0.8414239482200647,
+      "f1-score": 0.8843537414965986,
+      "support": 309.0
+    },
+    "1": {
+      "precision": 0.449438202247191,
+      "recall": 0.6779661016949152,
+      "f1-score": 0.5405405405405406,
+      "support": 59.0
+    },
+    "accuracy": 0.8152173913043478,
+    "macro avg": {
+      "precision": 0.690668921912126,
+      "recall": 0.75969502495749,
+      "f1-score": 0.7124471410185695,
+      "support": 368.0
+    },
+    "weighted avg": {
+      "precision": 0.8545484869018916,
+      "recall": 0.8152173913043478,
+      "f1-score": 0.8292315163433175,
+      "support": 368.0
+    }
+  },
+  "confusion_matrix": {
+    "Pred Stay": {
+      "Actual Stay": 260,
+      "Actual Leave": 19
+    },
+    "Pred Leave": {
+      "Actual Stay": 49,
+      "Actual Leave": 40
+    }
+  },
+  "feature_counts": {
+    "numeric": 23,
+    "categorical": 10,
+    "transformed": 66
+  }
+}
