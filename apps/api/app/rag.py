@@ -13,11 +13,9 @@ class PolicyRAG:
     """
     Lightweight local policy retriever.
 
-    Why this exists:
-    - Chroma + Google embedding model was crashing on startup because the selected
-      embedding model is not available for the installed google-generativeai API version.
-    - This version keeps the project moving: it indexes the HR policy PDFs locally with
-      TF-IDF, retrieves relevant chunks, and still uses Gemini for grounded answer writing.
+    It indexes HR policy PDFs with TF-IDF and retrieves relevant chunks locally.
+    Gemini is only used to write the final answer. If Gemini is unavailable, the
+    endpoint still returns a grounded answer with sources.
     """
 
     def __init__(self, root: Path):
@@ -29,7 +27,7 @@ class PolicyRAG:
             self.policy_dir = root / self.policy_dir
 
         self.api_key = os.getenv("GOOGLE_API_KEY")
-        self.model_name = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")
+        self.model_name = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
         self.docs: list[str] = []
         self.metas: list[dict] = []
@@ -37,9 +35,12 @@ class PolicyRAG:
         self.matrix = None
         self.model = None
 
-        if self.api_key and self.api_key != "YOUR_REAL_GEMINI_API_KEY_HERE" and self.api_key != "YOUR_GEMINI_API_KEY_HERE":
-            genai.configure(api_key=self.api_key)
-            self.model = genai.GenerativeModel(self.model_name)
+        if self.api_key and not self.api_key.startswith("YOUR_"):
+            try:
+                genai.configure(api_key=self.api_key)
+                self.model = genai.GenerativeModel(self.model_name)
+            except Exception:
+                self.model = None
 
         self._index()
 
@@ -104,27 +105,16 @@ class PolicyRAG:
             for doc, meta, _score in hits
         )
 
-        # If Gemini key is missing/invalid, still return a useful grounded retrieval result.
-        if self.model is None:
-            top_doc, top_meta, _ = hits[0]
-            return {
-                "answer": (
-                    "I found relevant policy context, but Gemini is not configured yet. "
-                    f"The strongest match is from [{top_meta['source']}], chunk {top_meta['chunk']}: "
-                    f"{top_doc[:500]}..."
-                ),
-                "sources": [
-                    {
-                        "source": meta["source"],
-                        "chunk": meta["chunk"],
-                        "score": score,
-                        "preview": doc[:250] + "...",
-                    }
-                    for doc, meta, score in hits
-                ],
-            }
+        fallback_answer = (
+            "I found relevant policy context from the current policy corpus. "
+            f"The strongest source is [{hits[0][1]['source']}], chunk {hits[0][1]['chunk']}. "
+            f"Relevant excerpt: {hits[0][0][:500]}..."
+        )
 
-        prompt = f"""You are an HR analytics assistant for a consulting team.
+        if self.model is None:
+            answer = fallback_answer
+        else:
+            prompt = f"""You are an HR analytics assistant for a consulting team.
 
 Answer the user's question using ONLY the policy context below.
 If the answer is not in the context, say:
@@ -141,17 +131,11 @@ QUESTION:
 
 ANSWER:
 """
-
-        try:
-            response = self.model.generate_content(prompt)
-            answer = response.text
-        except Exception as e:
-            top_doc, top_meta, _ = hits[0]
-            answer = (
-                "I found relevant policy context, but the configured Gemini model was unavailable. "
-                f"Strongest source: [{top_meta['source']}], chunk {top_meta['chunk']}. "
-                f"Relevant excerpt: {top_doc[:500]}..."
-            )
+            try:
+                response = self.model.generate_content(prompt)
+                answer = response.text
+            except Exception:
+                answer = fallback_answer
 
         return {
             "answer": answer,
@@ -165,4 +149,3 @@ ANSWER:
                 for doc, meta, score in hits
             ],
         }
-

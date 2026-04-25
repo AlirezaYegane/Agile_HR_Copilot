@@ -64,11 +64,10 @@ def explain_risk(employee_id: str, root: Path) -> dict:
         return {"error": f"Employee {employee_id} not found"}
 
     r = row.iloc[0]
+    explanation = _fallback_explanation(r)
 
     api_key = os.getenv("GOOGLE_API_KEY")
     model_name = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
-
-    explanation = _fallback_explanation(r)
 
     if api_key and not api_key.startswith("YOUR_"):
         try:

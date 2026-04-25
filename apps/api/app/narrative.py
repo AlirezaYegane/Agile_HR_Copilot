@@ -36,14 +36,14 @@ def _fallback_narrative(period: str, kpis: dict, error: str | None = None) -> st
     high_risk = kpis.get("High Risk Count", "the current high-risk cohort")
     engagement = kpis.get("Engagement Index", "the current engagement index")
 
-    note = ""
+    fallback_note = ""
     if error:
-        note = " [Local fallback used because the configured Gemini model was unavailable.]"
+        fallback_note = " Local fallback narrative used because the configured Gemini model was unavailable."
 
     return (
         f"For {period}, headcount is {headcount}, attrition is {attrition}, and the engagement index is {engagement}. "
-        f"The main people-risk signal is the high-risk employee cohort, currently reported as {high_risk}.{note}\n\n"
-        "The priority is to focus retention activity on teams and tenure groups with concentrated risk, rather than treating attrition as a broad organisation-wide issue.\n\n"
+        f"The main people-risk signal is the high-risk employee cohort, currently reported as {high_risk}.{fallback_note}\n\n"
+        "The priority is to focus retention activity on teams and tenure groups where risk is concentrated, rather than treating attrition as a broad organisation-wide issue.\n\n"
         "Recommended action: run targeted stay-interviews for high-risk employees and review workload, progression, and manager-support signals before the next reporting cycle. "
         "Next review: compare high-risk movement and attrition trend after the first retention intervention cycle."
     )
