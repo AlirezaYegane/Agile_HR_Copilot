@@ -65,17 +65,35 @@ flowchart LR
 
 ---
 
-## Dashboard screenshots
+## Screenshots
 
-| Executive Overview | Attrition & Retention | Employee Engagement |
+### AI Copilot
+
+| Board Narrative | Policy Q&A | Risk Explanation |
 |---|---|---|
-| ![Executive Overview](docs/images/page1_executive.png) | ![Attrition and Retention](docs/images/page2_attrition.png) | ![Employee Engagement](docs/images/page3_engagement.png) |
+| ![Copilot Narrative](docs/images/copilot_narrative.png) | ![Copilot Q&A](docs/images/copilot_qa.png) | ![Copilot Risk](docs/images/copilot_risk.png) |
 
-| Diversity & Inclusion | Workforce Planning | AI Copilot |
-|---|---|---|
-| ![Diversity and Inclusion](docs/images/page4_diversity.png) | ![Workforce Planning](docs/images/page5_workforce.png) | ![AI Copilot](docs/images/copilot_narrative.png) |
+### Model explainability and governance
 
----
+| SHAP Summary | Fairness Audit |
+|---|---|
+| ![SHAP summary](docs/images/shap_summary.png) | ![Fairness audit](docs/images/fairness_audit.png) |
+
+### Power BI dashboards
+
+The Power BI report is available at:
+
+`powerbi/AgileHRCopilot.pbix`
+
+Dashboard screenshots will be added after final visual polish:
+
+- Executive Overview
+- Attrition & Retention
+- Employee Engagement
+- Diversity & Inclusion
+- Workforce Planning
+
+
 
 ## Key artefacts
 
