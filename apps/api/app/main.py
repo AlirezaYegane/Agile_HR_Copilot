@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 import json
 import logging
@@ -29,16 +29,28 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-AUDIT_LOG = Path(os.getenv("AUDIT_LOG_PATH", str(ROOT / "apps/api/audit.log")))
-AUDIT_LOG.parent.mkdir(parents=True, exist_ok=True)
 
+def _resolve_audit_path() -> Path:
+    raw = os.getenv("AUDIT_LOG_PATH", "apps/api/audit.log")
+    p = Path(raw)
+    if not p.is_absolute():
+        p = ROOT / p
+    p.parent.mkdir(parents=True, exist_ok=True)
+    return p
+
+
+AUDIT_LOG = _resolve_audit_path()
 rag = PolicyRAG(root=ROOT)
 
 
 def audit(event: dict) -> None:
-    event["_ts"] = datetime.utcnow().isoformat()
-    with AUDIT_LOG.open("a", encoding="utf-8") as f:
-        f.write(json.dumps(event, ensure_ascii=False) + "\n")
+    event["_ts"] = datetime.now(timezone.utc).isoformat()
+    try:
+        with AUDIT_LOG.open("a", encoding="utf-8") as f:
+            f.write(json.dumps(event, ensure_ascii=False) + "\n")
+    except OSError as e:
+        # Never let audit logging crash a request.
+        log.warning("audit log write failed: %s", e)
 
 
 class NarrativeRequest(BaseModel):

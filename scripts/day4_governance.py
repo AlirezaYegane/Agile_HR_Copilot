@@ -85,8 +85,14 @@ metrics = json.loads(METRICS.read_text(encoding="utf-8")) if METRICS.exists() el
 rf = metrics.get("models", {}).get("Random Forest", {})
 report = metrics.get("random_forest_classification_report", {})
 
-roc_auc = rf.get("roc_auc", "TBC")
-pr_auc = rf.get("pr_auc", "TBC")
+def _fmt_metric(value):
+    if isinstance(value, (int, float)):
+        return f"{value:.3f}"
+    return value
+
+
+roc_auc = _fmt_metric(rf.get("roc_auc", "TBC"))
+pr_auc = _fmt_metric(rf.get("pr_auc", "TBC"))
 
 model_card = f"""# Model Card — Attrition Risk Model
 

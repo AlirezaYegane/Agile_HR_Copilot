@@ -85,7 +85,12 @@ The Power BI report is available at:
 
 `powerbi/AgileHRCopilot.pbix`
 
-Dashboard screenshots will be added after final visual polish:
+> **Status:** the `.pbix` is wired to the Gold layer. Dashboard screenshots
+> (`docs/images/page1_executive.png` … `page5_workforce.png`) are pending the
+> final visual polish pass. The detailed page-by-page design blueprint is in
+> [`docs/powerbi_design.md`](docs/powerbi_design.md).
+
+Pages:
 
 - Executive Overview
 - Attrition & Retention
@@ -428,7 +433,7 @@ Copy-Item .env.example .env
 notepad .env
 ```
 
-Set:
+Set values in `.env` (copy from `.env.example`):
 
 ```env
 GOOGLE_API_KEY=YOUR_GEMINI_API_KEY_HERE
@@ -440,7 +445,10 @@ GOLD_LAKEHOUSE_PATH=./lakehouse/gold
 AUDIT_LOG_PATH=./apps/api/audit.log
 ```
 
-The local retriever does not require Google embeddings. Gemini generation can fall back to local deterministic text if the model is unavailable.
+> **You don't need a Gemini key to run the demo.** The local TF-IDF retriever
+> does not require Google embeddings, and Gemini generation falls back to a
+> deterministic local narrative / templated explanation if the model is
+> unavailable. See [`docs/architecture.md`](docs/architecture.md) for details.
 
 ---
 

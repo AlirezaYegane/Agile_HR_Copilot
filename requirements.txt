@@ -10,12 +10,14 @@ shap==0.44.*
 matplotlib==3.8.*
 seaborn==0.13.*
 imbalanced-learn==0.12.*
+joblib==1.4.*
 
 # Synthetic data
 faker==24.*
 
 # Policy docs / PDF
 reportlab==4.*
+pypdf==4.*
 
 # Backend
 fastapi==0.110.*
@@ -23,10 +25,9 @@ uvicorn[standard]==0.29.*
 pydantic==2.*
 python-dotenv==1.*
 
-# RAG
-chromadb==0.4.*
+# RAG (local TF-IDF; vectoriser ships with scikit-learn)
+# Gemini is optional — the API has a deterministic local fallback.
 google-generativeai==0.5.*
-pypdf==4.*
 
 # Frontend
 streamlit==1.33.*

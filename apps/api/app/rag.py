@@ -67,11 +67,18 @@ class PolicyRAG:
         return chunks
 
     def _index(self) -> None:
+        if not self.policy_dir.exists():
+            return
+
         pdfs = sorted(self.policy_dir.glob("*.pdf"))
 
         for pdf in pdfs:
-            reader = PdfReader(str(pdf))
-            full_text = "\n".join(page.extract_text() or "" for page in reader.pages)
+            try:
+                reader = PdfReader(str(pdf))
+                full_text = "\n".join(page.extract_text() or "" for page in reader.pages)
+            except Exception:
+                # Skip unreadable PDFs rather than crashing the API on startup.
+                continue
 
             for i, chunk in enumerate(self._chunk(full_text)):
                 self.docs.append(chunk)

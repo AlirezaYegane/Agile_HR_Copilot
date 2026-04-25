@@ -30,8 +30,8 @@ The model must not be used as an automated decision maker.
 
 ## Performance
 
-- Random Forest ROC-AUC: 0.7859689539794855
-- Random Forest PR-AUC: 0.44956128922161603
+- Random Forest ROC-AUC: 0.786
+- Random Forest PR-AUC: 0.450
 - Evaluation split: 25% holdout, stratified by attrition label
 
 ## Fairness review
