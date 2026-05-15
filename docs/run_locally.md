@@ -48,7 +48,17 @@ The Copilot UI will open in your browser.
 python scripts\verify_day4.py
 ```
 
-## 7. Open Power BI
+## 7. Validate the Gold layer for Power BI
+
+Before opening Power BI Desktop:
+
+```powershell
+python powerbi\validate_gold_for_powerbi.py
+```
+
+Expected last line: `OK — all expected gold tables and columns are present.`
+
+## 8. Open Power BI
 
 Open:
 
@@ -56,7 +66,13 @@ Open:
 powerbi/AgileHRCopilot.pbix
 ```
 
-Refresh after rebuilding the local lakehouse so the visuals reflect the latest Gold Parquet outputs.
+Refresh after rebuilding the local lakehouse so the visuals reflect the latest Gold Parquet outputs. Build kit:
+
+- `docs/powerbi_design.md` — visual spec
+- `powerbi/AgileHRTheme.json` — load via *View → Themes → Browse for themes*
+- `powerbi/dax_measures.md` — paste into a `_Measures` table
+- `powerbi/power_query_import_guide.md` — relationships and types
+- `powerbi/page_build_checklist.md` — execution checklist
 
 ## Notes on the AI fallback
 

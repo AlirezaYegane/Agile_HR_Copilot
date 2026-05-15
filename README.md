@@ -81,22 +81,28 @@ flowchart LR
 
 ### Power BI dashboards
 
-The Power BI report is available at:
+The Power BI file lives at `powerbi/AgileHRCopilot.pbix`. The report is built **by hand** in Power BI Desktop because `.pbix` files are not source-controllable as text. The complete build kit is checked in:
 
-`powerbi/AgileHRCopilot.pbix`
+| File | Purpose |
+|---|---|
+| [`docs/powerbi_design.md`](docs/powerbi_design.md) | Visual design spec for each page |
+| [`powerbi/AgileHRTheme.json`](powerbi/AgileHRTheme.json) | Brand-aligned report theme (load in PBI Desktop) |
+| [`powerbi/dax_measures.md`](powerbi/dax_measures.md) | Complete `_Measures` library |
+| [`powerbi/power_query_import_guide.md`](powerbi/power_query_import_guide.md) | Data import + relationships |
+| [`powerbi/page_build_checklist.md`](powerbi/page_build_checklist.md) | Tick-as-you-go execution checklist |
+| [`powerbi/validate_gold_for_powerbi.py`](powerbi/validate_gold_for_powerbi.py) | Pre-flight validator for the Parquet contract |
 
-> **Status:** the `.pbix` is wired to the Gold layer. Dashboard screenshots
-> (`docs/images/page1_executive.png` … `page5_workforce.png`) are pending the
-> final visual polish pass. The detailed page-by-page design blueprint is in
-> [`docs/powerbi_design.md`](docs/powerbi_design.md).
+> **Status:** the build kit is complete. Dashboard screenshots
+> (`docs/images/page1_executive.png` … `page5_workforce.png`) are **pending** the
+> final manual build/export pass in Power BI Desktop.
 
 Pages:
 
-- Executive Overview
-- Attrition & Retention
-- Employee Engagement
-- Diversity & Inclusion
-- Workforce Planning
+1. Executive Overview
+2. Attrition & Retention
+3. Employee Engagement
+4. Diversity & Inclusion
+5. Workforce Planning
 
 
 
@@ -630,20 +636,37 @@ Agile_HR_Copilot/
 │   └── web/
 │       └── streamlit_app.py
 ├── data/
-│   ├── raw/
+│   ├── raw/         # gitignored
 │   └── policies/
 ├── docs/
 │   ├── architecture.md
 │   ├── model_card.md
+│   ├── powerbi_design.md
+│   ├── run_locally.md
+│   ├── demo_script.md
+│   ├── interview_prep.md
+│   ├── final_checklist.md
+│   ├── product_alignment.md
 │   ├── fairness_audit_summary.csv
 │   ├── fairness_auc_by_group.csv
 │   └── images/
 ├── lakehouse/
-│   ├── bronze/
-│   ├── silver/
-│   └── gold/
+│   ├── bronze/      # gitignored
+│   ├── silver/      # gitignored
+│   └── gold/        # gitignored
 ├── notebooks/
+│   ├── 01_bronze_ingest.ipynb
+│   ├── 02_silver_transform.ipynb
+│   ├── 03_gold_star_schema.ipynb
+│   ├── 04_ml_attrition.ipynb
+│   └── 05_fairness_audit.ipynb
 ├── powerbi/
+│   ├── AgileHRCopilot.pbix
+│   ├── AgileHRTheme.json
+│   ├── dax_measures.md
+│   ├── power_query_import_guide.md
+│   ├── page_build_checklist.md
+│   └── validate_gold_for_powerbi.py
 ├── scripts/
 ├── README.md
 ├── requirements.txt

@@ -1,0 +1,73 @@
+{
+  "health": {
+    "status": "ok",
+    "rag_ready": true,
+    "policy_chunks": 12
+  },
+  "selected_employee_id": "EMP_6D7ADA7D8E",
+  "narrative": {
+    "ok": true,
+    "status_code": 200,
+    "response": {
+      "narrative": "For Q3 2026, headcount is 1420, attrition is 18%, and the engagement index is 3.4 / 5. The main people-risk signal is the high-risk employee cohort, currently reported as the current high-risk cohort. Local fallback narrative used because the configured Gemini model was unavailable.\n\nThe priority is to focus retention activity on teams and tenure groups where risk is concentrated, rather than treating attrition as a broad organisation-wide issue.\n\nRecommended action: run targeted stay-interviews for high-risk employees and review workload, progression, and manager-support signals before the next reporting cycle. Next review: compare high-risk movement and attrition trend after the first retention intervention cycle.",
+      "period": "Q3 2026"
+    }
+  },
+  "ask": {
+    "ok": true,
+    "status_code": 200,
+    "response": {
+      "answer": "I found relevant policy context from the current policy corpus. The strongest source is [retention_career_growth.pdf], chunk 2. Relevant excerpt: oles, high-performing employees, and employees with elevated attrition risk. A stay interview should explore what keeps the employee engaged, what may cause them to leave, what support they need from their manager, and whether there are immediate actions that could improve their experience. If an employee is identified as a flight risk, the manager should escalate to the HR Business Partner within five business days. The escalation should include the reason for concern, recent engagement signals...",
+      "sources": [
+        {
+          "source": "retention_career_growth.pdf",
+          "chunk": 2,
+          "score": 0.22845234597045286,
+          "preview": "oles, high-performing employees, and employees with elevated attrition risk. A stay interview should explore what keeps the employee engaged, what may cause them to leave, what support they need from their manager, and whether there are immediate act..."
+        },
+        {
+          "source": "retention_career_growth.pdf",
+          "chunk": 1,
+          "score": 0.11940447714929811,
+          "preview": "le for more than eighteen months should be considered for internal mobility conversations. Where business needs allow, managers should support lateral moves, stretch assignments, mentoring, shadowing, and project-based exposure across teams. Internal..."
+        },
+        {
+          "source": "retention_career_growth.pdf",
+          "chunk": 0,
+          "score": 0.11182044944504652,
+          "preview": "Retention & Career Growth Policy This policy defines how the organisation supports employee retention, internal mobility, career growth, and early intervention for avoidable resignations. The goal is to ensure that employees can see a credible future..."
+        },
+        {
+          "source": "retention_career_growth.pdf",
+          "chunk": 3,
+          "score": 0.057405192809122464,
+          "preview": "lytics model has labelled them as a risk. Analytics may support manager awareness, but all actions must remain human-led, respectful, and focused on support rather than surveillance. Retention interventions must be documented at an aggregate level fo..."
+        }
+      ]
+    }
+  },
+  "explain_risk": {
+    "ok": true,
+    "status_code": 200,
+    "response": {
+      "employee_id": "EMP_6D7ADA7D8E",
+      "risk_score": 0.9350855870255951,
+      "risk_band": "High",
+      "top_drivers": [
+        {
+          "driver": "MonthlyIncome",
+          "impact": 0.051141617729508274
+        },
+        {
+          "driver": "OverTime_Yes",
+          "impact": 0.04845380701335081
+        },
+        {
+          "driver": "TotalExperienceYears",
+          "impact": 0.04673402759333722
+        }
+      ],
+      "explanation": "This employee's attrition risk is HIGH (93.5%). The main drivers are:\n1. MonthlyIncome (increases risk).\n2. OverTime_Yes (increases risk).\n3. TotalExperienceYears (increases risk).\n\nSuggested manager action: schedule a supportive stay-interview and review workload, progression, and manager-support factors before taking any formal action."
+    }
+  }
+}

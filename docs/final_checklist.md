@@ -6,15 +6,24 @@
 - [x] Day 2 verify passes
 - [x] FastAPI smoke test passes
 - [x] Streamlit UI runs
-- [ ] Power BI file polished visually
+- [ ] Power BI file polished visually (build using the kit below, then export PNGs)
+
+## Power BI build kit
+
+- [x] `docs/powerbi_design.md`
+- [x] `powerbi/AgileHRTheme.json`
+- [x] `powerbi/dax_measures.md`
+- [x] `powerbi/power_query_import_guide.md`
+- [x] `powerbi/page_build_checklist.md`
+- [x] `powerbi/validate_gold_for_powerbi.py`
 
 ## Governance
 
 - [x] Model card exists
 - [x] Fairness audit CSV exists
 - [x] Fairness audit chart exists
-- [x] Fairness notebook exists
-- [ ] k-anonymity measures applied inside Power BI visuals
+- [x] Fairness notebook (polished, with method + interpretation)
+- [ ] k-anonymity measures applied inside Power BI visuals (`Headcount (k-safe)` measure ready in DAX library)
 
 ## Screenshots
 
