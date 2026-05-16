@@ -1,3 +1,5 @@
+<div dir="ltr">
+
 # Agile HR Copilot
 
 > A Fabric-inspired People Analytics accelerator with AI insights.  
@@ -747,3 +749,28 @@ No real employee data is used.
 Data: public IBM HR dataset + synthetic augmentation
 Purpose: interview/demo project
 ```
+
+
+## AI Copilot capabilities
+
+| Capability | What it does |
+|---|---|
+| Board narrative generation | Converts KPI inputs into a short CHRO-ready executive story |
+| Policy Q&A | Answers HR policy questions using the local policy corpus |
+| Attrition risk explanation | Explains model risk drivers in plain English |
+| Audit logging | Records Copilot usage for governance review |
+| Human-in-the-loop framing | Keeps employee-level risk as decision support, not automation |
+
+
+## Release
+
+Current baseline release:
+
+```text
+v1-polished
+```
+
+This release represents the polished v1 baseline: lakehouse, ML risk model, Power BI report, governance docs, local API smoke test, and Streamlit smoke test.
+
+
+</div>

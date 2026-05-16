@@ -1,0 +1,24 @@
+{
+  "checks": {
+    "health": {
+      "status": "ok",
+      "rag_ready": true,
+      "policy_chunks": 12
+    },
+    "narrative": {
+      "ok": true,
+      "preview": "For Q3 2026, headcount is 1420, attrition is 18%, and the engagement index is 3.4 / 5. The main people-risk signal is the high-risk employee cohort, currently reported as 87. Local fallback narrative used because the configured Gemini model was unava"
+    },
+    "ask": {
+      "ok": true,
+      "sources_count": 4,
+      "preview": "I found relevant policy context from the current policy corpus. The strongest source is [retention_career_growth.pdf], chunk 1. Relevant excerpt: le for more than eighteen months should be considered for internal mobility conversations. Where busines"
+    },
+    "explain_risk": {
+      "ok": true,
+      "employee_id": "EMP_6D7ADA7D8E",
+      "risk_band": "High",
+      "preview": "This employee's attrition risk is HIGH (93.5%). The main drivers are:\n1. MonthlyIncome (increases risk).\n2. OverTime_Yes (increases risk).\n3. TotalExperienceYears (increases risk).\n\nSuggested manager action: schedule a supportive stay-interview and r"
+    }
+  }
+}

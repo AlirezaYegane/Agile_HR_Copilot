@@ -1,3 +1,5 @@
+<div dir="ltr">
+
 # Architecture
 
 ```mermaid
@@ -48,3 +50,5 @@ The Copilot is designed to keep working even when Gemini is unavailable:
 - **Explain risk** — falls back to a templated plain-English explanation built from the SHAP top drivers in `fact_attrition_risk.parquet`.
 
 This makes the demo robust on a clean clone, an air-gapped laptop, or a flaky network.
+
+</div>

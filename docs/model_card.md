@@ -1,3 +1,5 @@
+<div dir="ltr">
+
 # Model Card — Attrition Risk Model
 
 ## Intended use
@@ -72,3 +74,5 @@ See:
 - Row-level security in the semantic model
 - Legal/privacy review before using real employee data
 - Clear communication that risk scores are decision support, not decisions
+
+</div>
